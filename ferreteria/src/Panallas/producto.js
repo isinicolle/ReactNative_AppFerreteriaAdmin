@@ -7,8 +7,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header} from '../componentes/'
 let primera=true;
-const productoURL="http://192.168.100.48:6001/api/productos/buscarProducto?id_producto=";
-const carri="http://192.168.100.48:6001/api/carrito/agregarProducto?idUsuario="
+const productoURL="http://192.168.0.10:6001/api/productos/buscarProducto?id_producto=";
+const carri="http://192.168.0.10:6001/api/carrito/agregarProducto?idUsuario="
 const Pantalla = ({route}) => {
     const cantidadProp=0;
     const [user,setUser]= useState();
@@ -82,7 +82,7 @@ const Pantalla = ({route}) => {
         <ScrollView>
         <View style={styles.container}>
             <Header text={'Producto'} busqueda={false} carrito={true} icon={'chevron-left'}></Header>
-            <Image style={styles.logo} source={{uri:('http://192.168.100.48:6001/img/'+imagen)}} />
+            <Image style={styles.logo} source={{uri:('http://192.168.0.10:6001/img/'+imagen)}} />
             <Text style={styles.nomProducto}>{descripcion}</Text>
             <Text style={styles.cat}>{categoria}</Text>
 

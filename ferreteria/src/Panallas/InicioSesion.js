@@ -15,7 +15,7 @@ const Pantalla = ({navigation})=> {
 const handleLogin = async ()=>{
 try{
   
-    const res = await fetch('http://192.168.100.48:6001/api/usuarioCliente/loginUsuarioCliente',
+    const res = await fetch('http://192.168.0.10:6001/api/usuarioCliente/loginUsuarioCliente',
     {method:'POST',
     headers:{
       Accept:'application/json',

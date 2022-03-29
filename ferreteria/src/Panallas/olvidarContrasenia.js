@@ -10,7 +10,7 @@ const OlvidarContra = ()=>{
   const [email,setEmail] = useState('')
     const handleRecuperar = async ()=>{
       try{
-        const res = await fetch('http://192.168.100.48:6001/api/usuarioCliente/recoveryclave?correo_usuario='+email,
+        const res = await fetch('http://192.168.0.10:6001/api/usuarioCliente/recoveryclave?correo_usuario='+email,
         {method:'GET',
         headers:{
           Accept:'application/json',

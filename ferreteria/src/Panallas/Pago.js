@@ -92,7 +92,7 @@ const RenderFooter = (id)=>{
       const handleProcesar = async ()=>
         {
         try{
-            const res = await fetch('http://192.168.100.48:6001/api/ventas/procesarCarrito?idUsuario='+id,
+            const res = await fetch('http://192.168.0.10:6001/api/ventas/procesarCarrito?idUsuario='+id,
             {method:'POST',
             headers:{
               Accept:'application/json',
@@ -193,7 +193,7 @@ const RenderFooter = (id)=>{
     
     async function obtenerdirecciones(id,index=0){
         try{
-            const res = await fetch('http://192.168.100.48:6001/api/direccionesEnvio/direccionEnvioXUsuario?id_usuarioCliente='+id,
+            const res = await fetch('http://192.168.0.10:6001/api/direccionesEnvio/direccionEnvioXUsuario?id_usuarioCliente='+id,
             {method:'GET',
             headers:{
               Accept:'application/json',
@@ -216,7 +216,7 @@ const RenderFooter = (id)=>{
     async function obtenerCarrito(id,total=false)
 {
     try{
-        const res = await fetch('http://192.168.100.48:6001/api/carrito/carritoCliente?idUsuario='+id,
+        const res = await fetch('http://192.168.0.10:6001/api/carrito/carritoCliente?idUsuario='+id,
         {method:'GET',
         headers:{
           Accept:'application/json',

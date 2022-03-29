@@ -55,7 +55,7 @@ const HeaderLista = ()=>{
 async function obtenerCarrito(id)
 {
     try{
-        const res = await fetch('http://192.168.100.48:6001/api/carrito/carritoCliente?idUsuario='+id,
+        const res = await fetch('http://192.168.0.10:6001/api/carrito/carritoCliente?idUsuario='+id,
         {method:'GET',
         headers:{
           Accept:'application/json',
