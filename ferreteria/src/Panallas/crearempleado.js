@@ -9,8 +9,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Pantalla = ()=> {
   const nav = useNavigation();
   const [nombre, setNombre]= useState('');
+  const [apellido, setApellido]= useState('');
+  const [usuario, setUsuario]= useState('');
+  const [telefono, setTelefono]= useState('');
+  const [direccion, setDireccion]= useState('');
+  const [fechanacimiento, setFechanacimiento]= useState('');
+  const [estadoE, setEstadoE]= useState(true);
+  const [estadoU, setEstadoU]= useState(true);
+  const [ciudad, setCiudad]= useState(4);
+  const [rol, setRol]= useState(3);
     const [correo, setCorreo]= useState('');
     const [contrasenia, setContrasenia]= useState('');
+    //setEstadoE = true;
+   // setEstadoU = true;
+    //setRol = 4;
+    //setCiudad = 3;
+
     const usuarioNuevo = async() =>{
       
       console.log(nombre);
@@ -44,10 +58,15 @@ const Pantalla = ()=> {
   
     <View style={styles.tarjeta}>
         <TextBox text={'Nombre'} icon={'face'} setValue={setNombre} value={nombre}/>
+        <TextBox text={'Apellido'} icon={'face'} setValue={setApellido} value={apellido}/>
+        <TextBox text={'Usuario'} icon={'face'} setValue={setUsuario} value={usuario}/>
+        <TextBox text={'Direccion'} icon={'face'} setValue={setDireccion} value={direccion}/>
+        <TextBox text={'Telefono'} icon={'face'} setValue={setTelefono} value={telefono}/>
+        <TextBox text={'YYYY-MM-DD'} icon={'face'} setValue={setFechanacimiento} value={fechanacimiento}/>
         <TextBox text={'Correo electrónico'} icon={'email'} setValue={setCorreo} value={correo}/>
         <PasswordBox  text={'Contraseña'} />
         <PasswordBox text={'Confirmar contraseña'} setValue={setContrasenia} value={contrasenia}/>
-        <Boton text={'Crear Cuenta'} onPress={usuarioNuevo}/>
+        <Boton text={'Crear Empleado Nuevo'} onPress={usuarioNuevo}/>
     </View>
     <Footer/>
   </SafeAreaView>
