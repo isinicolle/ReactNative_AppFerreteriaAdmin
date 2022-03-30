@@ -58,20 +58,50 @@ const Pantalla = ()=> {
 
          //id usuario empleado
          try{
-          const respuesta = await fetch('http://192.168.0.10:6001/api/empleados/idultimo'
+          const respuesta = await fetch('http://192.168.0.10:6001/api/empleados/idultimo')
           .then((respuesta)=>respuesta.json())
           .then((json)=> {
             setInfo(json)
             console.log(json)
           }
-          ));
+          );
            
            
             
            } catch(error){
              console.log(error);
           }
+
+          //usuario empleado
+        try{
+          const respuesta = await fetch(
+            'http://192.168.0.10:6001/api/usuarioempleados/insertarUsuarioEmpleados',{
+              method: 'POST',
+             headers:{
+               Accept: 'application/json',
+               'Content-Type': 'application/json'
+             },
+             body: JSON.stringify({
+              nom_usuarioEmpleado: usuario,
+              contrasenia_empleado: contrasenia,
+              correo_empleado: correo,
+              id_empleado: info.id_empleado
+             })
+            });
+            const json = await respuesta.json();
+            console.log(json);
+           
+            
+           } catch(error){
+             console.log(error);
+          }
+  
+  
+          
     }
+    console.log(info.id_empleado);
+
+    
   return (
     <ScrollView>
     <SafeAreaView style={styles.container}>
