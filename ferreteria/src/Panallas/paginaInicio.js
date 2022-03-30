@@ -11,7 +11,7 @@ const PantallaInicio = ({route,navigation})=> {
             <SafeAreaView style={styles.container}>
                 <Header busqueda={false} carrito={false} icon={'menu'} text={'Inicio'}/>
                     <View style={styles.containerBoton}>    
-                    <IconButton icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
+                    <IconButton onPress={()=>{navigation.navigate('Productos')}} icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
                     <IconButton icon={'user'} textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
                     <IconButton icon={'users'} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
                     <IconButton icon={'user-plus'} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
