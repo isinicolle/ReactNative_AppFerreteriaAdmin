@@ -55,7 +55,9 @@ const Pantalla = ()=> {
            console.log(error);
         }
 
+      }
 
+      const usuarioNuevoo = async() =>{
          //id usuario empleado
          try{
           const respuesta = await fetch('http://192.168.0.10:6001/api/empleados/idultimo')
@@ -119,6 +121,7 @@ const Pantalla = ()=> {
         <PasswordBox  text={'Contraseña'} />
         <PasswordBox text={'Confirmar contraseña'} setValue={setContrasenia} value={contrasenia}/>
         <Boton text={'Crear Empleado Nuevo'} onPress={usuarioNuevo}/>
+        <Boton text={'Crear usuario para este empleado'} onPress={usuarioNuevoo}/>
     </View>
     <Footer/>
   </SafeAreaView>
