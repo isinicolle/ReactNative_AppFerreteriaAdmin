@@ -13,8 +13,10 @@ import TarjetaDireccion from './tarjetaDireccion';
 import ListaDireccion from './listaDirecciones';
 import TarjetaCarrito from './TarjetaCarrito';
 import Pickers from './Picker';
+import IconButton from './IconButton'
 export {
 HiperVinculo,
+IconButton,
 Boton,
 PasswordBox,
 TextBox,

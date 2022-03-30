@@ -1,38 +1,24 @@
 import React from 'react'
 import { StatusBar,TouchableOpacity,TextInput, StyleSheet, Text, View,Image,SafeAreaView,ScrollView} from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons'
-import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto } from '../componentes/'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { IconButton,Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto } from '../componentes/'
 
 const PantallaInicio = ({route,navigation})=> {
     
     return (
         <ScrollView>
-        <SafeAreaView style={styles.container}>
-        <Header busqueda={true} carrito={true}icon={'menu'}/>
-        <View style={{paddingTop:10,flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'center'}}>
-        <TouchableOpacity>
-            <View style={styles.accesoRapido}>
-                <Text style={{color:'#B9B9B9'}}>Electronica</Text>
-            </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
-            <View style={styles.accesoRapido}>
-                <Text style={{color:'#B9B9B9'}}>Hogar</Text>
-            </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>{navigation.navigate('Config')}}>
-            <View style={styles.accesoRapido}>
-                <Text style={{color:'#B9B9B9'}}>Configuracion</Text>
-            </View>
-        </TouchableOpacity>
-        </View>
-        <ListaProducto tipo={1} text={'Agricultura'} id={2} navigation={navigation}/>
-        <ListaProducto tipo={2} text={'TRUPPER'} id={1} navigation={navigation}/>
-        <ListaProducto tipo={1} text={'Soldadura'} id={1} navigation={navigation}/>
-        
-        <Footer/>
-    </SafeAreaView> 
+            <SafeAreaView style={styles.container}>
+                <Header busqueda={false} carrito={false} icon={'menu'} text={'Inicio'}/>
+                    <View style={styles.containerBoton}>    
+                    <IconButton icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
+                    <IconButton icon={'user'} textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
+                    <IconButton icon={'users'} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
+                    <IconButton icon={'user-plus'} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
+                    <IconButton icon={'cog'} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
+                    </View>  
+                <Footer/>
+            </SafeAreaView> 
         </ScrollView>
     );
   }
@@ -59,6 +45,15 @@ const PantallaInicio = ({route,navigation})=> {
         flex:1,
         marginHorizontal:5,
         
+    },
+    containerBoton:{
+        flex:1,
+        flexWrap:'wrap',
+        flexDirection:'row',
+        alignItems:'center',
+        alignContent:'center',
+        justifyContent:'center',
+        marginVertical:20
     }
 });
 export default PantallaInicio;

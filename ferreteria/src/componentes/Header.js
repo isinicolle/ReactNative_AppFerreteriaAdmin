@@ -17,9 +17,9 @@ const Header = ({navigation, onPress,text,icon,busqueda=false,carrito=false})=>{
         <View style={styles.container}>
             <>
             { (icon=='chevron-left')?  <TouchableOpacity onPress={()=> nav.pop()} style={styles.btnHeader}>
-                    <Icon name={icon} size={50}/>
+                    <Icon name={icon} color={'white'} size={50}/>
                 </TouchableOpacity> : <TouchableOpacity onPress={()=> nav.pop()} style={styles.btnHeader}>
-                    <Icon name={icon} size={50}/>
+                    <Icon name={icon} color={'white'} size={50}/>
                 </TouchableOpacity>  }
             </>
                
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         paddingVertical:'3%',
         alignItems:'center',
         width:'100%',
-        backgroundColor:'white'
+        backgroundColor:'#C70039'
     },
     btnHeader:{
         flex:1,
@@ -83,7 +83,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         flex:3,
         marginHorizontal:10,
-        marginVertical:'auto'
+        marginVertical:'auto',
+        color:'white'
         },
 
     btnCarrito:{
