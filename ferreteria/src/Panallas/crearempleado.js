@@ -29,8 +29,8 @@ const Pantalla = ()=> {
       
       console.log(nombre);
         try{
-        /*const respuesta = await fetch(
-          'http://192.168.0.8:6001/api/usuarioCliente/insertarUsuarioCliente',{
+        const respuesta = await fetch(
+          'http://192.168.0.8:6001/api/empleados/insertarEmpleados',{
             method: 'POST',
            headers:{
              Accept: 'application/json',
@@ -43,8 +43,8 @@ const Pantalla = ()=> {
            })
           });
           const json = await respuesta.json();
-          console.log(json);*/
-          nav.navigate('RegistroTerminado');
+          console.log(json);
+         
           
          } catch(error){
            console.log(error);
@@ -62,7 +62,7 @@ const Pantalla = ()=> {
         <TextBox text={'Usuario'} icon={'face'} setValue={setUsuario} value={usuario}/>
         <TextBox text={'Direccion'} icon={'face'} setValue={setDireccion} value={direccion}/>
         <TextBox text={'Telefono'} icon={'face'} setValue={setTelefono} value={telefono}/>
-        <TextBox text={'YYYY-MM-DD'} icon={'face'} setValue={setFechanacimiento} value={fechanacimiento}/>
+        <TextBox text={'YYYY-MM-DD'} icon={'face'} setValue={setFechanacimiento} value={fechanacimiento+"T00:00:00.000Z"}/>
         <TextBox text={'Correo electrónico'} icon={'email'} setValue={setCorreo} value={correo}/>
         <PasswordBox  text={'Contraseña'} />
         <PasswordBox text={'Confirmar contraseña'} setValue={setContrasenia} value={contrasenia}/>
