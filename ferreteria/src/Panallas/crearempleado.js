@@ -14,12 +14,10 @@ const Pantalla = ()=> {
   const [telefono, setTelefono]= useState('');
   const [direccion, setDireccion]= useState('');
   const [fechanacimiento, setFechanacimiento]= useState('');
-  const [estadoE, setEstadoE]= useState(true);
-  const [estadoU, setEstadoU]= useState(true);
-  const [ciudad, setCiudad]= useState(4);
-  const [rol, setRol]= useState(3);
     const [correo, setCorreo]= useState('');
     const [contrasenia, setContrasenia]= useState('');
+    const [idempleado, setIdempleado]= useState('');
+    const [info, setInfo]= useState('');
     //setEstadoE = true;
    // setEstadoU = true;
     //setRol = 4;
@@ -28,18 +26,25 @@ const Pantalla = ()=> {
     const usuarioNuevo = async() =>{
       
       console.log(nombre);
+
+      //empleado
         try{
         const respuesta = await fetch(
-          'http://192.168.0.8:6001/api/empleados/insertarEmpleados',{
+          'http://192.168.0.10:6001/api/empleados/insertarEmpleados',{
             method: 'POST',
            headers:{
              Accept: 'application/json',
              'Content-Type': 'application/json'
            },
            body: JSON.stringify({
-             nombre_usuario: nombre,
-             contraenia_usuario: contrasenia,
-             correo_usuario: correo,
+            nom_empleado: nombre,
+            apellido_empleado: apellido,
+            telefono_empleado: telefono,
+            direccion_empleado: direccion,
+            id_ciudad: 4,
+            id_rol: 3,
+            fnacimiento_empleado: fechanacimiento+"T00:00:00.000Z",
+            Estado: true
            })
           });
           const json = await respuesta.json();
@@ -49,6 +54,23 @@ const Pantalla = ()=> {
          } catch(error){
            console.log(error);
         }
+
+
+         //id usuario empleado
+         try{
+          const respuesta = await fetch('http://192.168.0.10:6001/api/empleados/idultimo'
+          .then((respuesta)=>respuesta.json())
+          .then((json)=> {
+            setInfo(json)
+            console.log(json)
+          }
+          ));
+           
+           
+            
+           } catch(error){
+             console.log(error);
+          }
     }
   return (
     <ScrollView>
@@ -62,7 +84,7 @@ const Pantalla = ()=> {
         <TextBox text={'Usuario'} icon={'face'} setValue={setUsuario} value={usuario}/>
         <TextBox text={'Direccion'} icon={'face'} setValue={setDireccion} value={direccion}/>
         <TextBox text={'Telefono'} icon={'face'} setValue={setTelefono} value={telefono}/>
-        <TextBox text={'YYYY-MM-DD'} icon={'face'} setValue={setFechanacimiento} value={fechanacimiento+"T00:00:00.000Z"}/>
+        <TextBox text={'YYYY-MM-DD'} icon={'face'} setValue={setFechanacimiento} value={fechanacimiento}/>
         <TextBox text={'Correo electrónico'} icon={'email'} setValue={setCorreo} value={correo}/>
         <PasswordBox  text={'Contraseña'} />
         <PasswordBox text={'Confirmar contraseña'} setValue={setContrasenia} value={contrasenia}/>
