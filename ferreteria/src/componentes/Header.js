@@ -3,7 +3,7 @@ import { Pressable,StyleSheet,Text,TouchableOpacity, View,TextInput } from 'reac
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const Header = ({navigation, onPress,text,icon,busqueda=false,carrito=false})=>{
+const Header = ({navigation, onPress,text,icon,busqueda=false,carrito=false,context})=>{
     let [user,setUser] = useState('')
     useEffect(  async ()=>{
         await AsyncStorage.getItem("idUsuario").then((data)=>{
@@ -25,9 +25,9 @@ const Header = ({navigation, onPress,text,icon,busqueda=false,carrito=false})=>{
                
             {busqueda? 
             ( <View style={styles.containerBusqueda}>
-                <TextInput placeholder='Buscar producto' style={{flex:1}}>
-                
-                </TextInput>   
+
+                <TextInput onFocus={()=>{nav.push('Busqueda',context)}} placeholder='Buscar producto' style={{flex:1}}/> 
+
             </View> 
             
             )

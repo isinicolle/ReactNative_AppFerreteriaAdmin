@@ -18,7 +18,8 @@ import Producto from './producto';
 import RegistroTerminado from './registroTerminado'
 import CrearUsuario from './crearUsuario';
 import PaginaProductos from './paginaProductos';
+import PaginaBusqueda from './PaginaBusqueda';
 export   {
-Login,AgregarDireccion,PaginaProductos,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
+Login,AgregarDireccion,PaginaBusqueda,PaginaProductos,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
 
 }

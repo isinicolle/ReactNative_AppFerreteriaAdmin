@@ -9,7 +9,7 @@ const PantallaInicio = ({route,navigation})=> {
     return (
         <ScrollView>
         <SafeAreaView style={styles.container}>
-        <Header busqueda={true}  icon={'chevron-left'}/>
+        <Header busqueda={true} context={'productos'}  icon={'chevron-left'}/>
         <View style={{paddingTop:10,flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'center'}}>
         <TouchableOpacity>
             <View style={styles.accesoRapido}>

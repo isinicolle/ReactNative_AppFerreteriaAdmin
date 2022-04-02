@@ -2,9 +2,9 @@ import React from 'react'
 import { Pressable,StyleSheet,Text,TouchableOpacity } from 'react-native'
 
 
-const Boton = ({ onPress,text,color='#C70039'})=>{
+const Boton = ({ onPress,text,color='#C70039',padding=15})=>{
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.container,{backgroundColor:color}]}>
+        <TouchableOpacity onPress={onPress} style={[styles.container,{backgroundColor:color,padding:padding}]}>
             <Text style={styles.text}>
                 {text}
             </Text>

@@ -3,37 +3,45 @@ import { Pressable,StyleSheet,Text,TouchableOpacity, View,TextInput,Image } from
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import ScrollerNumero from './ScrollerNumero'
 import Boton from './Boton'
-class Producto{
-    constructor(id_producto,descripcion_producto,categoria,marca,precio,imagen,cantidad){
-        this.id_producto = id_producto,
-        this.descripcion_producto = descripcion_producto,
-        this.categoria = categoria,
-        this.marca = marca,
-        this.precio = precio,
-        this.imagen = imagen,
-        this.cantidad=cantidad
-    }      
-}
+
 const TarjetaBusqueda = ({item})=>{
-    console.log(item.imagen)
+    
+    if (item.id_producto)
     return (
-        <View style={styles.container}>
+
             <TouchableOpacity>
             <View style={styles.tarjeta}>
-                <Image source={{uri:item.imagen}} style={styles.imagen}/>
+                <Image source = {{uri:((item.imagen.includes("http")? item.imagen :'http://192.168.100.48:6001/img/'+item.imagen ))}} style={styles.imagen}/>
                 <View style={styles.descripciones}>
                 <Text style={{marginVertical:10,fontSize:20,fontWeight:'bold'}}>{item.descripcion_producto}</Text>
-                <Text>{item.marca}</Text>
-                <Text>{item.categoria}</Text>
+                <Text>{item.Marcas.descripcion_marca}</Text>
+                <Text>{item.Categorias.descripcion_categoria}</Text>
                 </View>
                 <View style={styles.precio}>
-                <Text>{item.precio}</Text>
+                <Text>Lps. {item.precio_actual}</Text>
                 </View>
 
             </View>
             </TouchableOpacity>
-        </View>
+  
     )
+    if (item.id_empleado)
+        return(
+            <TouchableOpacity>
+            <View style={styles.tarjeta}>
+                <Icon name='person' size={150} style={styles.imagen}/>
+                <View style={styles.descripciones}>
+                <Text style={{marginVertical:10,fontSize:20,fontWeight:'bold'}}>{item.nom_empleado+' '+item.apellido_empleado}</Text>
+                <Text>{item.telefono_empleado}</Text>
+                <Text>{item.fnacimiento_empleado}</Text>
+                </View>
+                <View style={styles.precio}>
+                <Text>{ item.Estado? 'Activo':'Inactivo' } </Text>
+                </View>
+
+            </View>
+            </TouchableOpacity>
+        )
 };
 const styles = StyleSheet.create({
     container:{
@@ -41,7 +49,6 @@ const styles = StyleSheet.create({
        backgroundColor:'#f8f8f8'
     },
     tarjeta:{
-       flex:1,
        flexDirection:'row',
        borderBottomColor:'gray',
        borderBottomWidth:1,
@@ -67,7 +74,8 @@ const styles = StyleSheet.create({
      marginLeft:15
     },
     precio:{
-      justifyContent:'flex-end'  
+      justifyContent:'flex-end',
+      marginHorizontal:10
     },
 })
 

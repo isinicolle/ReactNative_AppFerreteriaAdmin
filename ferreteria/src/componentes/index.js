@@ -14,8 +14,10 @@ import ListaDireccion from './listaDirecciones';
 import TarjetaCarrito from './TarjetaCarrito';
 import Pickers from './Picker';
 import IconButton from './IconButton'
+import TarjetaBusqueda from './tarjetaBusqueda';
 export {
 HiperVinculo,
+TarjetaBusqueda,
 IconButton,
 Boton,
 PasswordBox,
