@@ -12,10 +12,10 @@ const PantallaInicio = ({route,navigation})=> {
                 <Header busqueda={false} carrito={false} icon={'menu'} text={'Inicio'}/>
                     <View style={styles.containerBoton}>    
                     <IconButton onPress={()=>{navigation.navigate('Productos')}} icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
-                    <IconButton icon={'user'} textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
-                    <IconButton icon={'users'} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
+                    <IconButton icon={'user'}  textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
+                    <IconButton icon={'users'}  onPress={()=>{navigation.navigate('Busqueda','empleados')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
                     <IconButton icon={'user-plus'} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
-                    <IconButton icon={'cog'} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
+                    <IconButton icon={'cog'}  onPress={()=>{navigation.push('Config')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
                     </View>  
                 <Footer/>
             </SafeAreaView> 
