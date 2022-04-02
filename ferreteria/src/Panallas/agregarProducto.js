@@ -38,10 +38,9 @@ const PantallaAgregarP = () => {
             <Header  busqueda={true}  icon={'chevron-left'}></Header>
            
             <View style={styles.tarjeta}>
+                <Text style={styles.infoProducto}>NUEVO PRODUCTO</Text>
             <Image source={{ uri: selectedImage.localUri }} style={styles.logo} />
-      <Text >
-        To share a photo from your phone with a friend, just press the button below!
-      </Text>
+      
         <Boton onPress={openImagePickerAsync} text={'Pick a photo'}> </Boton>
          
             </View>
@@ -59,10 +58,10 @@ const PantallaAgregarP = () => {
             <Header  busqueda={true}  icon={'chevron-left'}></Header>
            
             <View style={styles.tarjeta}>
+            <Text style={styles.infoProducto}>NUEVO PRODUCTO</Text>
+            
             <Image source={{ uri: 'https://i.imgur.com/TkIrScD.png' }} style={styles.logo} />
-      <Text >
-        To share a photo from your phone with a friend, just press the button below!
-      </Text>
+     
         <Boton onPress={openImagePickerAsync} text={'Pick a photo'}> </Boton>
          
             </View>
@@ -116,6 +115,17 @@ const styles = StyleSheet.create({
          minHeight: 170,
         margin: 10
     },
+    infoProducto: {
+        color: '#000',
+        fontSize: 25,
+        flex: 0,
+        marginLeft: '10%',
+        marginRight: '10%',
+        textAlign: 'center',
+        marginBottom: 10,
+        marginTop: 10
+    },
+
    
 })
 export default PantallaAgregarP;
