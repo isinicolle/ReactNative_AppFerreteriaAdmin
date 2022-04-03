@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts,Pickers} from '../componentes/'
-const primera=true;
+
 const productoFoto="http://192.168.1.8:6001/api/imagen/?id=";
 
 
@@ -17,16 +17,18 @@ const PantallaAgregarP = () => {
     const [marca,setMarca] = useState('');
     const [selectedCategoria,setSelectedCategoria]= useState('');
     const [categoria,setCategoria] = useState('');
+    const [selectedProveedores,setSelectedProveedores]= useState('');
+    const [proveedores,setProveedores] = useState('');
     const [descripcion,setDescripcion]=useState(null);
     
     const [selectedImage, setSelectedImage] = React.useState(null);
 
     useEffect(()=>{
-        if(primera==true){
-            fetchMarca();
-        }
-
-      })
+        console.log('hola');
+          fetchMarca();
+          fetchCategoria();
+          fetchProveedores();
+      },[])
 
     //----------------------Marca-----------------------------------------
       const fetchMarca= async ()=>{
@@ -40,8 +42,11 @@ const PantallaAgregarP = () => {
               }
             }
           );
+         
           await res.json().then((data)=>{setMarca(data);setSelectedMarca(data[0])})
-          primera=false;
+          console.log(marca);
+         
+       
         }
         catch(err){
           console.log(err);
@@ -62,8 +67,32 @@ const PantallaAgregarP = () => {
               }
             }
           );
+          
           await res.json().then((data)=>{setCategoria(data);setSelectedCategoria(data[0])})
-          primera=false;
+         
+        
+        }
+        catch(err){
+          console.log(err);
+        }
+      
+    }
+
+    //--------------------------------Proveedores-------------------------------------------
+
+    const fetchProveedores= async ()=>{
+        try
+        {
+          const res = await fetch('http://192.168.1.8:6001/api/proveedores/listar',
+            {method:'GET',
+              headers:{
+              Accept:'application/json',
+              'Content-Type':'application/json'
+              }
+            }
+          );
+          await res.json().then((data)=>{setProveedores(data);setSelectedProveedores(data[0])})
+        
         }
         catch(err){
           console.log(err);
@@ -132,6 +161,7 @@ const PantallaAgregarP = () => {
             <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
        <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
        <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
+       <Pickers label={'nom_prov'} selectedValue={selectedProveedores} setSelectedValue={setSelectedProveedores} items={proveedores} text={'Proveedores'} icon={'city'} />
 
         <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
          
@@ -159,7 +189,18 @@ const PantallaAgregarP = () => {
             <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
        <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
        <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
-        <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
+       <Pickers label={'nom_prov'} selectedValue={selectedProveedores} setSelectedValue={setSelectedProveedores} items={proveedores} text={'Proveedores'} icon={'city'} />
+       <Texts text={'Cantidad por unidad'}/>
+            <TextBox text={'Cantidad por unidad'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <Texts text={'Costo'}/>
+            <TextBox text={'Costo'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <Texts text={'Precio venta'}/>
+            <TextBox text={'Precio'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <Texts text={'Stock'}/>
+            <TextBox text={'Stock'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <Texts text={'Descuento'}/>
+            <TextBox text={'Descuento'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+        <Boton onPress={editarFoto} text={'Guardar Producto'}> </Boton>
          
             </View>
           
