@@ -15,6 +15,8 @@ const productoFoto="http://192.168.1.8:6001/api/imagen/?id=";
 const PantallaAgregarP = () => {
     const [selectedMarca,setSelectedMarca]= useState('');
     const [marca,setMarca] = useState('');
+    const [selectedCategoria,setSelectedCategoria]= useState('');
+    const [categoria,setCategoria] = useState('');
     const [descripcion,setDescripcion]=useState(null);
     
     const [selectedImage, setSelectedImage] = React.useState(null);
@@ -26,7 +28,7 @@ const PantallaAgregarP = () => {
 
       })
 
-    
+    //----------------------Marca-----------------------------------------
       const fetchMarca= async ()=>{
         try
         {
@@ -46,10 +48,31 @@ const PantallaAgregarP = () => {
         }
       
     }
+
+    //------------------------Categoria---------------------------------------
+
+           const fetchCategoria= async ()=>{
+        try
+        {
+          const res = await fetch('http://192.168.1.8:6001/api/categoria/listarCategoria',
+            {method:'GET',
+              headers:{
+              Accept:'application/json',
+              'Content-Type':'application/json'
+              }
+            }
+          );
+          await res.json().then((data)=>{setCategoria(data);setSelectedCategoria(data[0])})
+          primera=false;
+        }
+        catch(err){
+          console.log(err);
+        }
       
+    }
     
    
-   
+   //--------------funcion y pantalla de fotos---------------------------------------------
     const editarFoto= async() => {
         
     const fotoData = new FormData();
@@ -93,7 +116,7 @@ const PantallaAgregarP = () => {
           setSelectedImage({ localUri: pickerResult.uri });
         };
        
-      
+//---------------------------------------si hay imagen-----------------------------------------------
         if (selectedImage !== null) {
           return (
             <ScrollView>
@@ -108,6 +131,7 @@ const PantallaAgregarP = () => {
         <Texts text={'Nombre Producto'}/>
             <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
        <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
+       <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
 
         <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
          
@@ -118,7 +142,7 @@ const PantallaAgregarP = () => {
         </ScrollView>
           );
         }
-     
+  //---------------------------predeterminado-----------------------------------------------   
     return (
         
         <ScrollView>
@@ -134,7 +158,7 @@ const PantallaAgregarP = () => {
         <Texts text={'Nombre Producto'}/>
             <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
        <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
-
+       <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
         <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
          
             </View>
@@ -145,6 +169,7 @@ const PantallaAgregarP = () => {
     );
 }
 
+//-----------------------------------styles-------------------------------------
 
 const styles = StyleSheet.create({
     container: {
