@@ -40,7 +40,7 @@ const Pantalla = () => {
 
     const cargar= async() => {
       
-          await  fetch(productoURL+21).then((response)=> response.json())
+          await  fetch(productoURL+15).then((response)=> response.json())
             .then((json)=>{
                 setDescripcion(json.descripcion_producto);
                 setCantidadxUnidad(json.cantidad_por_unidad);

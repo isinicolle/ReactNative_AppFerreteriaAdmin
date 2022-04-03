@@ -7,13 +7,75 @@ import ScrollerNumero from '../componentes/ScrollerNumero';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 
-import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts} from '../componentes/'
-
+import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts,Pickers} from '../componentes/'
+const primera=true;
+const productoFoto="http://192.168.1.8:6001/api/imagen/?id=";
 
 
 const PantallaAgregarP = () => {
+    const [selectedMarca,setSelectedMarca]= useState('');
+    const [marca,setMarca] = useState('');
+    const [descripcion,setDescripcion]=useState(null);
     
     const [selectedImage, setSelectedImage] = React.useState(null);
+
+    useEffect(()=>{
+        if(primera==true){
+            fetchMarca();
+        }
+
+      })
+
+    
+      const fetchMarca= async ()=>{
+        try
+        {
+          const res = await fetch('http://192.168.1.8:6001/api/marca/listarMarcas',
+            {method:'GET',
+              headers:{
+              Accept:'application/json',
+              'Content-Type':'application/json'
+              }
+            }
+          );
+          await res.json().then((data)=>{setMarca(data);setSelectedMarca(data[0])})
+          primera=false;
+        }
+        catch(err){
+          console.log(err);
+        }
+      
+    }
+      
+    
+   
+   
+    const editarFoto= async() => {
+        
+    const fotoData = new FormData();
+
+    fotoData.append('img', {
+        uri: selectedImage.localUri,
+        name: 'imagen',
+        type: 'image/jpg'
+    }
+    )
+        try {
+            const respuesta = await fetch(
+                productoFoto+15,{
+                 method: 'POST',
+                 headers:{
+                     Accept: 'multipart/form-data',
+                     'Content-Type': 'multipart/form-data'},
+                  body: fotoData
+                 } );
+                 const json= await respuesta.json();
+                 console.log(json);
+                 Alert.alert("FERRETEAR","Datos editados correctamente");
+        } catch (error) {
+            console.error(error);
+        } 
+      }
 
     let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -24,12 +86,13 @@ const PantallaAgregarP = () => {
         }
     
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
         if (pickerResult.cancelled === true) {
             return;
           }
-      
           setSelectedImage({ localUri: pickerResult.uri });
         };
+       
       
         if (selectedImage !== null) {
           return (
@@ -42,6 +105,11 @@ const PantallaAgregarP = () => {
             <Image source={{ uri: selectedImage.localUri }} style={styles.logo} />
       
         <Boton onPress={openImagePickerAsync} text={'Pick a photo'}> </Boton>
+        <Texts text={'Nombre Producto'}/>
+            <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+       <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
+
+        <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
          
             </View>
           
@@ -63,6 +131,11 @@ const PantallaAgregarP = () => {
             <Image source={{ uri: 'https://i.imgur.com/TkIrScD.png' }} style={styles.logo} />
      
         <Boton onPress={openImagePickerAsync} text={'Pick a photo'}> </Boton>
+        <Texts text={'Nombre Producto'}/>
+            <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+       <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
+
+        <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
          
             </View>
           

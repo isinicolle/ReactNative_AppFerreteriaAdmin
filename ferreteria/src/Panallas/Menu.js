@@ -11,7 +11,6 @@ export default function Menu() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="AgregarProducto" component={PantallaAgregarP}/>
-
       <Stack.Screen name="editarEliminarProducto" component={PantallaProd}/>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Inicio" component={Inicio} />
