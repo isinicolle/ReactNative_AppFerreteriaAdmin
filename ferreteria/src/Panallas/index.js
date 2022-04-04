@@ -15,11 +15,12 @@ import Inicio from './paginaInicio';
 import Pago from './Pago';
 import Privacidad from './privacidad'
 import Producto from './producto';
-import RegistroTerminado from './registroTerminado'
+import RegistroTerminado from './registroTerminado';
 import CrearUsuario from './crearUsuario';
 import PaginaProductos from './paginaProductos';
 import PaginaBusqueda from './PaginaBusqueda';
+import PantallaProd from './editarEliminarProducto';
+import PantallaAgregarP from './agregarProducto';
 export   {
-Login,AgregarDireccion,PaginaBusqueda,PaginaProductos,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
-
+Login,PantallaAgregarP,PantallaProd,AgregarDireccion,PaginaBusqueda,PaginaProductos,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
 }

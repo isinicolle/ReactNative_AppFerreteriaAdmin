@@ -9,7 +9,7 @@ const TarjetaBusqueda = ({item})=>{
     if (item.id_producto)
     return (
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>{console.log(item)}} >
             <View style={styles.tarjeta}>
                 <Image source = {{uri:((item.imagen.includes("http")? item.imagen :'http://192.168.100.48:6001/img/'+item.imagen ))}} style={styles.imagen}/>
                 <View style={styles.descripciones}>
