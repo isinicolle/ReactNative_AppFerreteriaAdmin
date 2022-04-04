@@ -28,7 +28,6 @@ export default function Menu() {
         <Stack.Screen name="Pago" component={Pago} />
         <Stack.Screen name="OlvidarContra" component={OlvidarContra} />
         <Stack.Screen name="RegistroTerminado" component={RegistroTerminado} />
-       
         <Stack.Screen name="InformacionUsuario" component={InformacionUsuario} />
         <Stack.Screen name="crearUsuario" component={CrearUsuario}/>
        
