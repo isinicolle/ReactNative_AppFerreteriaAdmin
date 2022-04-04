@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Pantallas
-import { Login,PaginaBusqueda,PaginaProductos,CrearUsuario, AgregarDireccion, Condiciones, HistorialCompra, HistorialDetalle, MisionVision, Privacidad, Inicio, Producto, Config, ConfirmarCorreo, Direcciones, Carrito, Pago, OlvidarContra, RegistroTerminado, Busqueda, InformacionUsuario, PantallaProd,PantallaAgregarP} from './index';
+import { Login,crearempleado,PaginaBusqueda,PaginaProductos,CrearUsuario, AgregarDireccion, Condiciones, HistorialCompra, HistorialDetalle, MisionVision, Privacidad, Inicio, Producto, Config, ConfirmarCorreo, Direcciones, Carrito, Pago, OlvidarContra, RegistroTerminado, Busqueda, InformacionUsuario, PantallaProd,PantallaAgregarP} from './index';
 
 const Stack = createNativeStackNavigator();
 export default function Menu() {

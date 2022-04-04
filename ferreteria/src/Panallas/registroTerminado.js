@@ -23,7 +23,7 @@ const Pantalla = ({navigation})=> {
     if (selectedDepartamento.id_departamento)
     try
     {
-      const res = await fetch('http://192.168.100.48:6001/api/ciudades/listarCiudades?idDepartamento='+selectedDepartamento.id_departamento,
+      const res = await fetch('http://192.168.0.10:6001/api/ciudades/listarCiudades?idDepartamento='+selectedDepartamento.id_departamento,
         {method:'GET',
           headers:{
           Accept:'application/json',
@@ -42,7 +42,7 @@ const Pantalla = ({navigation})=> {
   const fetchDepartamentos= async ()=>{
     try
     {
-      const res = await fetch('http://192.168.100.48:6001/api/departamentos/listar',
+      const res = await fetch('http://192.168.0.10:6001/api/departamentos/listar',
         {method:'GET',
           headers:{
           Accept:'application/json',

@@ -22,7 +22,7 @@ const TarjetaCarrito = ({Cartitem,pago=false})=>{
         <View style={styles.container}>
         <View style={styles.tarjeta}>
             <View style={styles.container1}>
-                <Image source={{uri:('http://192.168.100.48:6001/img/'+Cartitem.Productos.imagen)}} style={styles.imagen}/>
+                <Image source={{uri:('http://192.168.0.10:6001/img/'+Cartitem.Productos.imagen)}} style={styles.imagen}/>
                 <View style={styles.descripciones}>
                     <Text style={{fontWeight:'bold',fontSize:20,textAlign:'left'}}>
                     {Cartitem.Productos.descripcion_producto}
