@@ -10,6 +10,8 @@ import * as ImagePicker from 'expo-image-picker';
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts,Pickers} from '../componentes/'
 
 const productoFoto="http://192.168.1.8:6001/api/imagen/?id=";
+const productoAgg="http://192.168.1.8:6001/api/productos/guardarProducto";
+
 
 
 const PantallaAgregarP = () => {
@@ -20,6 +22,12 @@ const PantallaAgregarP = () => {
     const [selectedProveedores,setSelectedProveedores]= useState('');
     const [proveedores,setProveedores] = useState('');
     const [descripcion,setDescripcion]=useState(null);
+    const [cantidadxu,setCantidadxU]=useState(null);
+    const [costo,setCosto]=useState(null);
+    const [precio,setPrecio]=useState(null);
+    const [descuento,setDescuento]=useState(null);
+    const [stock,setStock]=useState(null);
+    let idprod=null;
     
     const [selectedImage, setSelectedImage] = React.useState(null);
 
@@ -99,6 +107,40 @@ const PantallaAgregarP = () => {
         }
       
     }
+
+
+    //-------------------------Agregar producto------------------------------
+    const AgregarProducto= async() => {
+      try {
+          const respuesta = await fetch(
+              productoAgg,{
+               method: 'POST',
+               headers:{
+                   Accept: 'application/json',
+                   'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                  descripcion_producto: descripcion,
+                  id_marca: selectedMarca.id_marca,
+                  id_categoria: selectedCategoria.id_categoria,
+                  id_proveedor: selectedProveedores.id_prov,
+                  cantidad_por_unidad: cantidadxu,
+                  costo_producto:Number(costo),
+                  precio_actual:Number(precio),
+                  stock:Number(stock),
+                  descuento:Number(descuento),
+                  estado:true,
+                  imagen: "Provisional.jpg"
+                })
+               } );
+               const json= await respuesta.json();
+               console.log(json.id_producto);
+               idprod=json.id_producto;
+               editarFoto();
+               Alert.alert("FERRETEAR","Datos agregados");
+      } catch (error) {
+          console.error(error);
+      } 
+    }
     
    
    //--------------funcion y pantalla de fotos---------------------------------------------
@@ -114,7 +156,7 @@ const PantallaAgregarP = () => {
     )
         try {
             const respuesta = await fetch(
-                productoFoto+15,{
+                productoFoto+idprod,{
                  method: 'POST',
                  headers:{
                      Accept: 'multipart/form-data',
@@ -162,8 +204,17 @@ const PantallaAgregarP = () => {
        <Pickers label={'descripcion_marca'} selectedValue={selectedMarca} setSelectedValue={setSelectedMarca} items={marca} text={'Marca'} icon={'city'} />
        <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
        <Pickers label={'nom_prov'} selectedValue={selectedProveedores} setSelectedValue={setSelectedProveedores} items={proveedores} text={'Proveedores'} icon={'city'} />
-
-        <Boton onPress={editarFoto} text={'Actualizar foto'}> </Boton>
+       <Texts text={'Cantidad por unidad'}/>
+            <TextBox text={'Cantidad por unidad'} setValue={setCantidadxU} value={cantidadxu} icon={'text-format'} />
+            <Texts text={'Costo'}/>
+            <TextBox text={'Costo'} setValue={setCosto} value={costo} icon={'text-format'} />
+            <Texts text={'Precio venta'}/>
+            <TextBox text={'Precio'} setValue={setPrecio} value={precio} icon={'text-format'} />
+            <Texts text={'Stock'}/>
+            <TextBox text={'Stock'} setValue={setStock} value={stock} icon={'text-format'} />
+            <Texts text={'Descuento'}/>
+            <TextBox text={'Descuento'} setValue={setDescuento} value={descuento} icon={'text-format'} />
+        <Boton onPress={AgregarProducto} text={'Agregar Producto'}> </Boton>
          
             </View>
           
@@ -191,16 +242,16 @@ const PantallaAgregarP = () => {
        <Pickers label={'descripcion_categoria'} selectedValue={selectedCategoria} setSelectedValue={setSelectedCategoria} items={categoria} text={'Categoria'} icon={'city'} />
        <Pickers label={'nom_prov'} selectedValue={selectedProveedores} setSelectedValue={setSelectedProveedores} items={proveedores} text={'Proveedores'} icon={'city'} />
        <Texts text={'Cantidad por unidad'}/>
-            <TextBox text={'Cantidad por unidad'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <TextBox text={'Cantidad por unidad'} setValue={setCantidadxU} value={cantidadxu} icon={'text-format'} />
             <Texts text={'Costo'}/>
-            <TextBox text={'Costo'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <TextBox text={'Costo'} setValue={setCosto} value={costo} icon={'text-format'} />
             <Texts text={'Precio venta'}/>
-            <TextBox text={'Precio'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <TextBox text={'Precio'} setValue={setPrecio} value={precio} icon={'text-format'} />
             <Texts text={'Stock'}/>
-            <TextBox text={'Stock'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+            <TextBox text={'Stock'} setValue={setStock} value={stock} icon={'text-format'} />
             <Texts text={'Descuento'}/>
-            <TextBox text={'Descuento'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
-        <Boton onPress={editarFoto} text={'Guardar Producto'}> </Boton>
+            <TextBox text={'Descuento'} setValue={setDescuento} value={descuento} icon={'text-format'} />
+        <Boton onPress={AgregarProducto} text={'Agregar Producto'}> </Boton>
          
             </View>
           
