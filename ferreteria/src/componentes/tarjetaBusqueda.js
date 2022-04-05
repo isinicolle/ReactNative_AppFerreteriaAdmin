@@ -27,13 +27,13 @@ const TarjetaBusqueda = ({item})=>{
     )
     if (item.id_empleado)
         return(
-            <TouchableOpacity>
+            <TouchableOpacity  onPress={()=>{nav.push('Empleado',{idEmp:item.id_empleado})}} >
             <View style={styles.tarjeta}>
                 <Icon name='person' size={150} style={styles.imagen}/>
                 <View style={styles.descripciones}>
                 <Text style={{marginVertical:10,fontSize:20,fontWeight:'bold'}}>{item.nom_empleado+' '+item.apellido_empleado}</Text>
                 <Text>{item.telefono_empleado}</Text>
-                <Text>{item.fnacimiento_empleado}</Text>
+                <Text>{(item.fnacimiento_empleado+'').substring(0,10)}</Text>
                 </View>
                 <View style={styles.precio}>
                 <Text>{ item.Estado? 'Activo':'Inactivo' } </Text>

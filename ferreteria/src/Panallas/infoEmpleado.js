@@ -5,11 +5,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import {Boton,HiperVinculo,TextBox,PasswordBox,Footer, Texts, Header} from '../componentes/'
 const idcliente=7
 let primera=true;
-const clienteURL="http://192.168.0.9:6001/api/empleados/buscarEmpleado?id_empleado=";
-const clienteActu="http://192.168.0.9:6001/api/empleados/actualizarEmpleados?id_empleado=";
+const clienteURL="http://192.168.100.48:6001/api/empleados/buscarEmpleado?id_empleado=";
+const clienteActu="http://192.168.100.48:6001/api/empleados/actualizarEmpleados?id_empleado=";
 
 const Empleado=({route}) => {
-
+    console.log(route);
     const [nombre,setNombre]=useState(null);
     const [apellido,setApellido]=useState(null);
     const [telefono,setTelefono]=useState(null);
@@ -17,20 +17,20 @@ const Empleado=({route}) => {
 
     
     useEffect(()=>{
-        if(primera==true){
+      
         cargar();
-        }
+        
     },[]
     )
     const cargar= async() => {
        
-            fetch(clienteURL+route.params.idCli).then((response)=> response.json())
+            fetch(clienteURL+route.params.idEmp).then((response)=> response.json())
             .then((json)=>{
                 setNombre(json.nom_empleado);
                 setApellido(json.apellido_empleado);
                 setTelefono(json.telefono_empleado);
                 setDireccion(json.direccion_empleado);
-                primera=false;
+               
             })
             .catch((error)=>console.log(error))
         
@@ -38,7 +38,7 @@ const Empleado=({route}) => {
     const presGuardarCambio= async() => {
       try {
           const respuesta = await fetch(
-           clienteActu+route.params.idCli,{
+           clienteActu+route.params.idEmp,{
                method: 'PUT',
                headers:{
                    Accept: 'application/json',
@@ -64,7 +64,7 @@ const Empleado=({route}) => {
         <ScrollView>
                  
         <View style={styles.container}>
-            <Header busqueda={false} text={"Informacion de empleado"} carrito={true} icon={'chevron-left'}></Header>
+            <Header busqueda={false} text={"Informacion de empleado"} icon={'chevron-left'}></Header>
         <View style={styles.tarjeta}>
         <Texts text='Nombre'/>
         <TextBox text={'Andres'} setValue={setNombre} value={nombre} icon={'face'} />
@@ -212,7 +212,8 @@ const styles = StyleSheet.create({
         width:'90%',
         flexGrow:1,
         borderRadius:20,
-        maxWidth:500
+        maxWidth:500,
+        marginTop:20
         }
 
 });

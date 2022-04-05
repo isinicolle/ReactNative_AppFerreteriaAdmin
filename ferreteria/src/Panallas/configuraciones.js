@@ -16,7 +16,7 @@ export default function App({route}) {
     },[route])
     return (
         <ScrollView>
-           <Header busqueda={false} text={"Configuracion"} carrito={true} icon={'chevron-left'}></Header>
+           <Header busqueda={false} text={"Configuracion"} carrito={false} icon={'chevron-left'}></Header>
         <View style={styles.container}>
             <View style={styles.contenedorApp}>
                 <View style={styles.contenedorControles}>

@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component} from 'react';
 import { TextInput, StyleSheet, Text, View,Image,SafeAreaView,ScrollView , Alert} from 'react-native';
-import {Boton,HiperVinculo,TextBox,PasswordBox,Footer} from '../componentes/'
+import {Boton,HiperVinculo,TextBox,PasswordBox,Footer,Header} from '../componentes/'
 import { useState } from 'react';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Pantalla = ()=> {
   const nav = useNavigation();
@@ -25,7 +26,6 @@ const Pantalla = ()=> {
 
     const usuarioNuevo = async() =>{
       
-      console.log(nombre);
 
       //empleado
         try{
@@ -107,6 +107,7 @@ const Pantalla = ()=> {
   return (
     <ScrollView>
     <SafeAreaView style={styles.container}>
+    <Header busqueda={false} text={"Creación de empleado"} icon={'chevron-left'}></Header>
     <Image style={styles.logo} source={require('../../assets/Images/Imagotipo.png')}/>
     <Text style={styles.header}>¡Nos encantará que seas parte de nosotros!</Text>
   

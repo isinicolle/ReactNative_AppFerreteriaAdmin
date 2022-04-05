@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Pantallas
-import { Login,crearempleado,PaginaBusqueda,PaginaProductos,Inicio,Producto,PantallaProd} from './index';
+import { Login,crearempleado,PaginaBusqueda,PaginaProductos,Inicio,Producto,PantallaProd,Empleado,Config} from './index';
 
 const Stack = createNativeStackNavigator();
 export default function Menu() {
@@ -13,10 +13,12 @@ export default function Menu() {
         <Stack.Screen name="Inicio" component={Inicio} />
         <Stack.Screen name='PantallaProd' component={PantallaProd}/>
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CrearEmp" component={crearempleado}/>
         <Stack.Screen name="Busqueda" component={PaginaBusqueda} />
         <Stack.Screen name="Productos" component={PaginaProductos} />
         <Stack.Screen name="Producto" component={Producto} />
-
+        <Stack.Screen name="Empleado" component={Empleado} />
+        <Stack.Screen name="Config" component={Config} />
       </Stack.Navigator>
     </NavigationContainer>
   );
