@@ -32,7 +32,6 @@ Privacidad
 Producto,
 Config,
 ConfirmarCorreo,
-
 OlvidarContra,
 RegistroTerminado,
 Busqueda,
