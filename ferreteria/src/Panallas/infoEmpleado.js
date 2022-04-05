@@ -8,7 +8,7 @@ let primera=true;
 const clienteURL="http://192.168.0.9:6001/api/empleados/buscarEmpleado?id_empleado=";
 const clienteActu="http://192.168.0.9:6001/api/empleados/actualizarEmpleados?id_empleado=";
 
-const Configuraciones=() => {
+const Configuraciones=({route}) => {
 
     const [nombre,setNombre]=useState(null);
     const [apellido,setApellido]=useState(null);
@@ -20,10 +20,11 @@ const Configuraciones=() => {
         if(primera==true){
         cargar();
         }
-    },)
+    },[Configuraciones]
+    )
     const cargar= async() => {
        
-            fetch(clienteURL+idcliente).then((response)=> response.json())
+            fetch(clienteURL+route.params.idCli).then((response)=> response.json())
             .then((json)=>{
                 setNombre(json.nom_empleado);
                 setApellido(json.apellido_empleado);
@@ -37,7 +38,7 @@ const Configuraciones=() => {
     const presGuardarCambio= async() => {
       try {
           const respuesta = await fetch(
-           clienteActu+idcliente,{
+           clienteActu+route.params.idCli,{
                method: 'PUT',
                headers:{
                    Accept: 'application/json',
