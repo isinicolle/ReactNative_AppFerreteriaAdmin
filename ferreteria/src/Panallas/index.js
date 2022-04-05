@@ -17,7 +17,8 @@ import Privacidad from './privacidad'
 import Producto from './producto';
 import RegistroTerminado from './registroTerminado'
 import CrearUsuario from './crearUsuario';
+import CrearEmpleado from './infoEmpleado';
 export   {
-Login,AgregarDireccion,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
+Login,AgregarDireccion,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario, CrearEmpleado
 
 }

@@ -3,13 +3,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Pantallas
-import { Login,CrearUsuario, AgregarDireccion, Condiciones, HistorialCompra, HistorialDetalle, MisionVision, Privacidad, Inicio, Producto, Config, ConfirmarCorreo, Direcciones, Carrito, Pago, OlvidarContra, RegistroTerminado, Busqueda, InformacionUsuario } from './index';
+import { Login,CrearUsuario, AgregarDireccion, Condiciones, HistorialCompra, HistorialDetalle, MisionVision, Privacidad, Inicio, Producto, Config, ConfirmarCorreo, Direcciones, Carrito, Pago, OlvidarContra, RegistroTerminado, Busqueda, InformacionUsuario, CrearEmpleado } from './index';
 
 const Stack = createNativeStackNavigator();
 export default function Menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="InformacionEmpleado" component={CrearEmpleado} />
       <Stack.Screen name="InformacionUsuario" component={InformacionUsuario} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Inicio" component={Inicio} />
