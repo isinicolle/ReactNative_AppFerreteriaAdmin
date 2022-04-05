@@ -12,7 +12,7 @@ const productoURL="http://192.168.1.8:6001/api/productos/buscarProducto?id_produ
 const productoActuURL="http://192.168.1.8:6001/api/productos/modificarProducto?id_producto=";
 const productoElimURL="http://192.168.1.8:6001/api/productos/eliminarProducto?id_producto=";
 
-const Pantalla = () => {
+const Pantalla = ({route}) => {
     const cantidadProp=0;
     const [user,setUser]= useState();
     const [cantidad,setCantidad]= useState(cantidadProp);
@@ -22,9 +22,12 @@ const Pantalla = () => {
     const [cantidadxunidad,setCantidadxUnidad]=useState(null);
     const [stock,setStock]=useState(null);
     const [descuento,setDescuento]=useState(null);
+    const [estadoaqui,setEstadoAqui]=useState(null);
     const [imagen,setImagen]=useState(null);
     const [marca,setMarca]=useState(null);
     const [categoria,setCategoria]=useState(null);
+    const [activoIn,setActivoIn]=useState(null);
+
    
    
 
@@ -40,7 +43,7 @@ const Pantalla = () => {
 
     const cargar= async() => {
       
-          await  fetch(productoURL+15).then((response)=> response.json())
+          await  fetch(productoURL+route.params.id).then((response)=> response.json())
             .then((json)=>{
                 setDescripcion(json.descripcion_producto);
                 setCantidadxUnidad(json.cantidad_por_unidad);
@@ -50,8 +53,15 @@ const Pantalla = () => {
                 setDescuento(json.descuento+"");
                 setImagen(json.imagen);
                 setCategoria(json.Categorias.descripcion_categoria);
-                setMarca(json.Marcas.descripcion_marca)
+                setMarca(json.Marcas.descripcion_marca);
+                setEstadoAqui(json.estado);
                 primera=false;
+                if(json.estado==true){
+                    setActivoIn('Habilitado')
+                }
+                else{
+                    setActivoIn('Deshabilidado')
+                }
        
             })
             .catch((error)=>console.log(error))
@@ -62,7 +72,7 @@ const Pantalla = () => {
     const presEditar= async() => {
         try {
             const respuesta = await fetch(
-                productoActuURL+21,{
+                productoActuURL+route.params.id,{
                  method: 'PUT',
                  headers:{
                      Accept: 'application/json',
@@ -88,18 +98,22 @@ const Pantalla = () => {
       const presEliminar= async() => {
         try {
             const respuesta = await fetch(
-                productoElimURL+id,{
-                 method: 'DELETE',
+                productoElimURL+route.params.id,{
+                 method: 'PUT',
                  headers:{
                      Accept: 'application/json',
                      'Content-Type': 'application/json'},
+                  body: JSON.stringify({
+                    estado: estadoaqui
+                  })
+              
                  } );
                  const json= await respuesta.json();
                  console.log(json);
-                 Alert.alert("FERRETEAR","Datos eliminados correctamente");
+                 Alert.alert("FERRETEAR","Datos editados correctamente");
                  cargar();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } 
       }
      
@@ -121,8 +135,9 @@ const Pantalla = () => {
             <TextBox text={'Stock'} setValue={setStock} value={stock} icon={'text-format'} tipo={"decimal-pad"}/>
             <Texts text={'Descuento'}/>
             <TextBox text={'Descuento'} setValue={setDescuento} value={descuento} icon={'text-format'} tipo={"decimal-pad"}/>
+            <Text style={styles.habi}>{activoIn}</Text>
             <Boton text={'Actualizar'} onPress={presEditar}/>
-            <Boton text={'Eliminar'} onPress={presEliminar}/>
+            <Boton text={'Cambiar Estado'} onPress={presEliminar}/>
 
          
             </View>
@@ -135,6 +150,14 @@ const Pantalla = () => {
 
 
 const styles = StyleSheet.create({
+
+    habi: {
+        fontSize:18,
+       fontWeight:'700',
+       textAlign:'center',
+       marginVertical:4
+    },
+
     container: {
         flex: 1,
         backgroundColor: '#f8f8f8',

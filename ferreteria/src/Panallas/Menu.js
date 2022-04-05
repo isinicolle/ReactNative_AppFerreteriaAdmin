@@ -10,6 +10,8 @@ export default function Menu() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="actualizarEmpleado" component={PantallaProd}/>
+      <Stack.Screen name="agregarEmpleado" component={PantallaAgregarP}/>
         <Stack.Screen name="Inicio" component={Inicio} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Busqueda" component={PaginaBusqueda} />
@@ -30,6 +32,9 @@ export default function Menu() {
         <Stack.Screen name="RegistroTerminado" component={RegistroTerminado} />
         <Stack.Screen name="InformacionUsuario" component={InformacionUsuario} />
         <Stack.Screen name="crearUsuario" component={CrearUsuario}/>
+        
+
+
        
       </Stack.Navigator>
     </NavigationContainer>

@@ -5,6 +5,7 @@ import { TextInput, StyleSheet, Text, View, Image, SafeAreaView,Pressable, Scrol
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ScrollerNumero from '../componentes/ScrollerNumero';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts,Pickers} from '../componentes/'
@@ -15,6 +16,7 @@ const productoAgg="http://192.168.1.8:6001/api/productos/guardarProducto";
 
 
 const PantallaAgregarP = () => {
+  const nav=useNavigation();
     const [selectedMarca,setSelectedMarca]= useState('');
     const [marca,setMarca] = useState('');
     const [selectedCategoria,setSelectedCategoria]= useState('');
@@ -108,9 +110,14 @@ const PantallaAgregarP = () => {
       
     }
 
+    const alerta= async() =>{
+      Alert.alert('FERRETERAR','Debe cargar la foto del producto')
+    }
+
 
     //-------------------------Agregar producto------------------------------
     const AgregarProducto= async() => {
+      if(descripcion!=null && cantidadxu!=null && costo!=null && precio!=null && stock!=null && descuento!=null){
       try {
           const respuesta = await fetch(
               productoAgg,{
@@ -137,9 +144,14 @@ const PantallaAgregarP = () => {
                idprod=json.id_producto;
                editarFoto();
                Alert.alert("FERRETEAR","Datos agregados");
+               nav.pop();
       } catch (error) {
           console.error(error);
       } 
+    }
+    else{
+      Alert.alert('FERRETEAR','Debe llenar todos los campos')
+    }
     }
     
    
@@ -165,7 +177,6 @@ const PantallaAgregarP = () => {
                  } );
                  const json= await respuesta.json();
                  console.log(json);
-                 Alert.alert("FERRETEAR","Datos editados correctamente");
         } catch (error) {
             console.error(error);
         } 
@@ -251,7 +262,7 @@ const PantallaAgregarP = () => {
             <TextBox text={'Stock'} setValue={setStock} value={stock} icon={'text-format'} />
             <Texts text={'Descuento'}/>
             <TextBox text={'Descuento'} setValue={setDescuento} value={descuento} icon={'text-format'} />
-        <Boton onPress={AgregarProducto} text={'Agregar Producto'}> </Boton>
+        <Boton onPress={alerta} text={'Agregar Producto'}> </Boton>
          
             </View>
           
