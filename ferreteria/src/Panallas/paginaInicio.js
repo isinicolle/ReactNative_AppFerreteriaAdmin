@@ -3,22 +3,35 @@ import { StatusBar,TouchableOpacity,TextInput, StyleSheet, Text, View,Image,Safe
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { IconButton,Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto } from '../componentes/'
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import react, { useEffect, useState } from 'react';
+import { useNavigation,useIsFocused } from '@react-navigation/native';
 const PantallaInicio = ({route,navigation})=> {
-    
+    const[rol,setRol]=useState('')
+    useEffect(async()=>{
+            await AsyncStorage.getItem('idRol').then((data)=>{
+                setRol(data);
+                console.log(data);
+            })
+    },[ ])
+   
     return (
+        
         <ScrollView>
-            <SafeAreaView style={styles.container}>
-                <Header busqueda={false} carrito={false} icon={'menu'} text={'Inicio'}/>
-                    <View style={styles.containerBoton}>    
-                    <IconButton onPress={()=>{navigation.navigate('Productos')}} icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
-                    <IconButton icon={'user'}  textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
-                    <IconButton icon={'users'}  onPress={()=>{navigation.navigate('Busqueda','empleados')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
-                    <IconButton icon={'user-plus'} onPress={()=>{navigation.push('agregarEmpleado')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
-                    <IconButton icon={'cog'}  onPress={()=>{navigation.push('Config')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
-                    </View>  
-                <Footer/>
-            </SafeAreaView> 
+           
+             <SafeAreaView style={styles.container}>
+             <Header busqueda={false} carrito={false} icon={'menu'} text={'Inicio'}/>
+                 <View style={styles.containerBoton}>    
+                 <IconButton onPress={()=>{navigation.navigate('Productos')}} icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
+                 <IconButton icon={'user'} onPress={()=>{navigation.navigate('Usuario')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
+                 <IconButton icon={'users'}  onPress={()=>{navigation.navigate('Busqueda','empleados')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
+                 {(rol==3) && <IconButton icon={'user-plus'} onPress={()=>{navigation.push('agregarEmpleado')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  />  }
+                 <IconButton icon={'cog'}  onPress={()=>{navigation.push('Config')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
+                 </View>  
+             <Footer/>
+         </SafeAreaView> 
+            
+           
         </ScrollView>
     );
   }

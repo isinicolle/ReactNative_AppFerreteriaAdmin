@@ -4,7 +4,7 @@ import { TextInput, StyleSheet, Text, View, Image, SafeAreaView, ScrollView } fr
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer } from '../componentes/'
 import { useNavigation } from '@react-navigation/native';
-const RecuperarCorreo = "http://192.168.1.25:6001/api/usuarioempleados/recuperarclave?correo_empleado="
+const RecuperarCorreo = "http://192.168.100.48:6001/api/usuarioempleados/recuperarclave?correo_empleado="
 
 const OlvidarContra = () => {
   const nav = useNavigation();

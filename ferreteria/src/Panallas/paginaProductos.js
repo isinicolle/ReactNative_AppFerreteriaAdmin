@@ -3,12 +3,12 @@ import { StatusBar,TouchableOpacity,TextInput, StyleSheet, Text, View,Image,Safe
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto } from '../componentes'
-
+import { useNavigation,useIsFocused } from '@react-navigation/native';
 const PantallaInicio = ({route,navigation})=> {
-    
+    const isFocused = useIsFocused();
     return (
         <ScrollView>
-        <SafeAreaView style={styles.container}>
+            {isFocused&&<SafeAreaView style={styles.container}>
         <Header busqueda={true} context={'productos'}  icon={'chevron-left'}/>
         <View style={{paddingTop:10,flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'center'}}>
         <TouchableOpacity>
@@ -32,7 +32,8 @@ const PantallaInicio = ({route,navigation})=> {
         <ListaProducto tipo={1} text={'Soldadura'} id={1} navigation={navigation}/>
         
         <Footer/>
-    </SafeAreaView> 
+    </SafeAreaView> }
+        
         </ScrollView>
     );
   }

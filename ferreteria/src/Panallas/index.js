@@ -16,7 +16,9 @@ import PantallaProd from './editarEliminarProducto';
 import PantallaAgregarP from './agregarProducto';
 import crearempleado from './crearempleado';
 import Empleado from './infoEmpleado';
+import Usuario from './infoUsuario';
 export   {
+Usuario,
 Login,
 PantallaAgregarP,
 Empleado,

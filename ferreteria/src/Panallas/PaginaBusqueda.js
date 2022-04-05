@@ -3,25 +3,40 @@ import { StatusBar,TouchableOpacity,TextInput, StyleSheet, Text, View,Image,Safe
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto,TarjetaBusqueda } from '../componentes'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation,useIsFocused } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const PaginaBusqueda = ({route,navigation})=> {
     //Use state
+    const isFocused = useIsFocused();
     const nav=useNavigation();
+    const[rol,setRol]=useState('');
     const[busqueda,setBusqueda]=useState('');
     const[listas,setListas] = useState('');
     const[listaMaestra,setListaMaestra]=useState('');
     const[buscando,setBuscando]=useState(false);
     //Funciones
     useEffect( ()=>{
-        fetchData()   
+        if(isFocused)
+        {
+            getAsync();}
+            fetchData()
+           
     },
-    [])
+    [isFocused,route])
     useEffect( ()=>{
         handleBusqueda()   
     },
     [busqueda])
+    const getAsync=async()=>{
+        await AsyncStorage.getItem('idRol').then((data)=>{
+            setRol(data);
+            console.log(data);
+        })
+    }
+
+
     const fetchData = async()=>{
-        if (listas=='')
+        
         switch(route.params.toLowerCase())
         {
             case "productos" : 
@@ -157,9 +172,10 @@ const PaginaBusqueda = ({route,navigation})=> {
             <View style={{flex:5}}>
                 <Boton padding={0} text={'Cancelar'} onPress={()=>{setBusqueda('');Keyboard.dismiss() }}/>
             </View> }
-            <TouchableOpacity onPress={()=>{handleAdd()}}>
+            {(rol==3) &&  <TouchableOpacity onPress={()=>{handleAdd()}}>
                 <Icon name="add-box"  color={'white'} size={50}/>
-            </TouchableOpacity>
+            </TouchableOpacity>}
+           
         </View>
             
             <FlatList style={{width:'100%'}} ListEmptyComponent={renderVacio} data={listas} keyExtractor={item=>item.id_producto} ListFooterComponent={()=>{return( <Footer/>   )}} renderItem={renderLista}/>

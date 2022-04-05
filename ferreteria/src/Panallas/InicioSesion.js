@@ -5,7 +5,7 @@ import { Boton, HiperVinculo, TextBox, PasswordBox, Footer } from '../componente
 import react, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const login = "http://192.168.1.25:6001/api/usuarioempleados/loginUsuarioEmpleado"
+const login = "http://192.168.100.48:6001/api/usuarioempleados/loginUsuarioEmpleado"
 
 const Pantalla = ({ navigation }) => {
   const [user, setUser] = useState('');
@@ -33,12 +33,14 @@ const Pantalla = ({ navigation }) => {
       const info = {
         token: json.data.token,
         id_empleado: json.data.data.id_empleado,
-        id_usuarioEmpleado: json.data.data.id_usuarioEmpleado
+        id_usuarioEmpleado: json.data.data.id_usuarioEmpleado,
+        id_rol:json.data.data.Empleados.id_rol
       }
-      console.log(info);
+
       await AsyncStorage.setItem('token', info.token);
       await AsyncStorage.setItem('idEmpleado', info.id_empleado + '');
       await AsyncStorage.setItem('idUsuario', info.id_usuarioEmpleado + '');
+      await AsyncStorage.setItem('idRol',info.id_rol+'');
       await nav.navigate('Inicio');
     }
     catch (err) {

@@ -75,7 +75,7 @@ const Pantalla = ({route}) => {
               setActivoIn('Habilitado')
           }
           else{
-              setActivoIn('Deshabilidado')
+              setActivoIn('Deshabilitado')
           }
       })
       .catch((error)=>console.log(error))
@@ -188,13 +188,14 @@ const styles = StyleSheet.create({
         height: '100%'
     },
 
-  logo: {
-    width: 250,
-    height: 250,
-    marginTop: "5%",
-    marginBottom: "2%",
-    padding: 10,
-  },
+    logo: {
+      width: 320,
+      height: 250,
+      resizeMode: 'contain',
+      marginTop: "5%",
+      marginBottom: "2%",
+      padding: 10,
+    },
   tarjeta: {
     flex: 3,
     padding: 10,
