@@ -3,13 +3,13 @@ import { Pressable,StyleSheet,Text,TouchableOpacity, View,TextInput,Image } from
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import ScrollerNumero from './ScrollerNumero'
 import Boton from './Boton'
-
+import { useNavigation } from '@react-navigation/native';
 const TarjetaBusqueda = ({item})=>{
-    
+    const nav = useNavigation();
     if (item.id_producto)
     return (
 
-            <TouchableOpacity onPress={()=>{console.log(item)}} >
+            <TouchableOpacity onPress={()=>{nav.push('PantallaProd',{idProd:item.id_producto})}} >
             <View style={styles.tarjeta}>
                 <Image source = {{uri:((item.imagen.includes("http")? item.imagen :'http://192.168.100.48:6001/img/'+item.imagen ))}} style={styles.imagen}/>
                 <View style={styles.descripciones}>

@@ -8,11 +8,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, Texts} from '../componentes/'
 const id=21;
 let primera=true;
-const productoURL="http://192.168.1.8:6001/api/productos/buscarProducto?id_producto=";
-const productoActuURL="http://192.168.1.8:6001/api/productos/modificarProducto?id_producto=";
-const productoElimURL="http://192.168.1.8:6001/api/productos/eliminarProducto?id_producto=";
+const productoURL="http://192.168.100.48:6001/api/productos/buscarProducto?id_producto=";
+const productoActuURL="http://192.168.100.48:6001/api/productos/modificarProducto?id_producto=";
+const productoElimURL="http://192.168.100.48:6001/api/productos/eliminarProducto?id_producto=";
 
-const Pantalla = () => {
+const Pantalla = ({route}) => {
     const cantidadProp=0;
     const [user,setUser]= useState();
     const [cantidad,setCantidad]= useState(cantidadProp);
@@ -26,21 +26,13 @@ const Pantalla = () => {
     const [marca,setMarca]=useState(null);
     const [categoria,setCategoria]=useState(null);
    
-   
-
-
-    useEffect(async ()=>{
-        if(primera==true){
+    useEffect( ()=>{
         cargar();
-        await AsyncStorage.getItem("idUsuario").then((data)=>{
-            setUser(data);
-        })
-    }
-    })
+    },[])
 
     const cargar= async() => {
       
-          await  fetch(productoURL+15).then((response)=> response.json())
+          await  fetch(productoURL+route.params.idProd).then((response)=> response.json())
             .then((json)=>{
                 setDescripcion(json.descripcion_producto);
                 setCantidadxUnidad(json.cantidad_por_unidad);
@@ -51,7 +43,7 @@ const Pantalla = () => {
                 setImagen(json.imagen);
                 setCategoria(json.Categorias.descripcion_categoria);
                 setMarca(json.Marcas.descripcion_marca)
-                primera=false;
+               
        
             })
             .catch((error)=>console.log(error))
@@ -108,7 +100,7 @@ const Pantalla = () => {
         <ScrollView>
         <View style={styles.container}>
             <Header  busqueda={true}  icon={'chevron-left'}></Header>
-            <Image style={styles.logo} source={{uri:('http://192.168.1.8:6001/img/'+imagen)}} />
+            {imagen && <Image style={styles.logo} source={{uri:((imagen.includes("http")? imagen :'http://192.168.100.48:6001/img/'+imagen ))}} />}
            
             <View style={styles.tarjeta}>
             <Texts text={'Nombre Producto'}/>
