@@ -14,7 +14,7 @@ const PantallaInicio = ({route,navigation})=> {
                     <IconButton onPress={()=>{navigation.navigate('Productos')}} icon={'tools'} textColor={'black'} color={'white'} iconColor={'black'}   text={'Productos'}  /> 
                     <IconButton icon={'user'}  textColor={'black'} color={'white'} iconColor={'black'} text={'Usuario'}  /> 
                     <IconButton icon={'users'}  onPress={()=>{navigation.navigate('Busqueda','empleados')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Empleados'}  /> 
-                    <IconButton icon={'user-plus'} onPress={()=>{navigation.push('CrearEmp')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
+                    <IconButton icon={'user-plus'} onPress={()=>{navigation.push('agregarEmpleado')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Crear Empleado'}  /> 
                     <IconButton icon={'cog'}  onPress={()=>{navigation.push('Config')}} textColor={'black'} color={'white'} iconColor={'black'} text={'Configuracion'}  /> 
                     </View>  
                 <Footer/>

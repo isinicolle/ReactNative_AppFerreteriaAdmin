@@ -33,89 +33,108 @@ const productoActuURL =
 const productoElimURL =
   "http://192.168.100.48:6001/api/productos/eliminarProducto?id_producto=";
 
-const Pantalla = ({ route }) => {
-  const cantidadProp = 0;
-  const [user, setUser] = useState();
-  const [cantidad, setCantidad] = useState(cantidadProp);
-  const [costo, setCosto] = useState(null);
-  const [precio, setPrecio] = useState(null);
-  const [descripcion, setDescripcion] = useState(null);
-  const [cantidadxunidad, setCantidadxUnidad] = useState(null);
-  const [stock, setStock] = useState(null);
-  const [descuento, setDescuento] = useState(null);
-  const [imagen, setImagen] = useState(null);
-  const [marca, setMarca] = useState(null);
-  const [categoria, setCategoria] = useState(null);
+const Pantalla = ({route}) => {
+  console.log(route)
+    const cantidadProp=0;
+    const [user,setUser]= useState();
+    const [cantidad,setCantidad]= useState(cantidadProp);
+    const [costo,setCosto]=useState(null);
+    const [precio,setPrecio]=useState(null);
+    const [descripcion,setDescripcion]=useState(null);
+    const [cantidadxunidad,setCantidadxUnidad]=useState(null);
+    const [stock,setStock]=useState(null);
+    const [descuento,setDescuento]=useState(null);
+    const [estadoaqui,setEstadoAqui]=useState(null);
+    const [imagen,setImagen]=useState(null);
+    const [marca,setMarca]=useState(null);
+    const [categoria,setCategoria]=useState(null);
+    const [activoIn,setActivoIn]=useState(null);
+
+   
+   
 
   useEffect(() => {
     cargar();
   }, []);
 
-  const cargar = async () => {
-    await fetch(productoURL + route.params.idProd)
-      .then((response) => response.json())
-      .then((json) => {
-        setDescripcion(json.descripcion_producto);
-        setCantidadxUnidad(json.cantidad_por_unidad);
-        setCosto(json.costo_producto + "");
-        setPrecio(json.precio_actual + "");
-        setStock(json.stock + "");
-        setDescuento(json.descuento + "");
-        setImagen(json.imagen);
-        setCategoria(json.Categorias.descripcion_categoria);
-        setMarca(json.Marcas.descripcion_marca);
+  const cargar= async() => {
+      
+    await  fetch(productoURL+route.params.idProd).then((response)=> response.json())
+      .then((json)=>{
+          setDescripcion(json.descripcion_producto);
+          setCantidadxUnidad(json.cantidad_por_unidad);
+          setCosto(json.costo_producto+"");
+          setPrecio(json.precio_actual+'');
+          setStock(json.stock+"");
+          setDescuento(json.descuento+"");
+          setImagen(json.imagen);
+          setCategoria(json.Categorias.descripcion_categoria);
+          setMarca(json.Marcas.descripcion_marca);
+          setEstadoAqui(json.estado);
+          if(json.estado==true){
+              setActivoIn('Habilitado')
+          }
+          else{
+              setActivoIn('Deshabilidado')
+          }
       })
-      .catch((error) => console.log(error));
-  };
+      .catch((error)=>console.log(error))
 
-  const presEditar = async () => {
-    try {
-      const respuesta = await fetch(productoActuURL + route.params.idProd, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          descripcion_producto: descripcion,
-          costo_producto: Number(costo),
-          precio_actual: Number(precio),
-          stock: Number(stock),
-          descuento: Number(descuento),
-        }),
-      });
-      const json = await respuesta.json();
-      console.log(json);
-      Alert.alert("FERRETEAR", "Datos editados correctamente");
-      cargar();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const presEliminar = async () => {
-    try {
-      const respuesta = await fetch(productoElimURL + route.params.idProd, {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      const json = await respuesta.json();
-      console.log(json);
-      Alert.alert("FERRETEAR", "Datos eliminados correctamente");
-      cargar();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return (
-    <ScrollView>
+}
+    const presEditar= async() => {
+        try {
+            const respuesta = await fetch(
+                productoActuURL+route.params.idProd,{
+                 method: 'PUT',
+                 headers:{
+                     Accept: 'application/json',
+                     'Content-Type': 'application/json'},
+                  body: JSON.stringify({
+                    descripcion_producto: descripcion,
+                    costo_producto:Number(costo),
+                    precio_actual:Number(precio),
+                    stock:Number(stock),
+                    descuento:Number(descuento)
+                  })
+              
+                 } );
+                 const json= await respuesta.json();
+                 console.log(json);
+                 Alert.alert("FERRETEAR","Datos editados correctamente");
+                 cargar();
+        } catch (error) {
+            console.error(error);
+        } 
+      }
+     
+      const presEliminar= async() => {
+        try {
+            const respuesta = await fetch(
+                productoElimURL+route.params.idProd,{
+                 method: 'PUT',
+                 headers:{
+                     Accept: 'application/json',
+                     'Content-Type': 'application/json'},
+                  body: JSON.stringify({
+                    estado: estadoaqui
+                  })
+              
+                 } );
+                 const json= await respuesta.json();
+                 console.log(json);
+                 Alert.alert("FERRETEAR","Datos editados correctamente");
+                 cargar();
+        } catch (error) {
+            console.error(error);
+        } 
+      }
+     
+    return (
+        
+      <ScrollView>
       <View style={styles.container}>
-        <Header busqueda={true} icon={"chevron-left"}></Header>
-        {imagen && (
+          <Header  busqueda={true}  icon={'chevron-left'}></Header>
+          {imagen && (
           <Image
             style={styles.logo}
             source={{
@@ -125,66 +144,49 @@ const Pantalla = ({ route }) => {
             }}
           />
         )}
+         
+          <View style={styles.tarjeta}>
+          <Texts text={'Nombre Producto'}/>
+          <TextBox text={'Producto'} setValue={setDescripcion} value={descripcion} icon={'text-format'} />
+          <Texts text={'Costo Producto'}/>
+          <TextBox text={'Costo'} setValue={setCosto} value={costo} icon={'text-format'} />
+          <Texts text={'Precio'}/>
+          <TextBox text={'Precio'} setValue={setPrecio} value={precio} icon={'text-format'} tipo={"decimal-pad"}/>
+          <Texts text={'Stock'}/>
+          <TextBox text={'Stock'} setValue={setStock} value={stock} icon={'text-format'} tipo={"decimal-pad"}/>
+          <Texts text={'Descuento'}/>
+          <TextBox text={'Descuento'} setValue={setDescuento} value={descuento} icon={'text-format'} tipo={"decimal-pad"}/>
+          <Text style={styles.habi}>{activoIn}</Text>
+          <Boton text={'Actualizar'} onPress={presEditar}/>
+          <Boton text={'Cambiar Estado'} onPress={presEliminar}/>
 
-        <View style={styles.tarjeta}>
-          <Texts text={"Nombre Producto"} />
-          <TextBox
-            text={"Producto"}
-            setValue={setDescripcion}
-            value={descripcion}
-            icon={"text-format"}
-          />
-          <Texts text={"Costo Producto"} />
-          <TextBox
-            text={"Costo"}
-            setValue={setCosto}
-            value={costo}
-            icon={"text-format"}
-          />
-          <Texts text={"Precio"} />
-          <TextBox
-            text={"Precio"}
-            setValue={setPrecio}
-            value={precio}
-            icon={"text-format"}
-            tipo={"decimal-pad"}
-          />
-          <Texts text={"Stock"} />
-          <TextBox
-            text={"Stock"}
-            setValue={setStock}
-            value={stock}
-            icon={"text-format"}
-            tipo={"decimal-pad"}
-          />
-          <Texts text={"Descuento"} />
-          <TextBox
-            text={"Descuento"}
-            setValue={setDescuento}
-            value={descuento}
-            icon={"text-format"}
-            tipo={"decimal-pad"}
-          />
-          <Boton text={"Actualizar"} onPress={presEditar} />
-          <Boton text={"Eliminar"} onPress={presEliminar} />
-        </View>
-
-        <Footer></Footer>
+       
+          </View>
+        
+          <Footer></Footer>
       </View>
-    </ScrollView>
+      </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f8f8f8",
-    alignItems: "center",
-    flexDirection: "column",
-    flexWrap: "wrap",
-    alignContent: "center",
-    height: "100%",
-  },
+
+    habi: {
+        fontSize:18,
+       fontWeight:'700',
+       textAlign:'center',
+       marginVertical:4
+    },
+
+    container: {
+        flex: 1,
+        backgroundColor: '#f8f8f8',
+        alignItems: 'center',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        alignContent: 'center',
+        height: '100%'
+    },
 
   logo: {
     width: 250,

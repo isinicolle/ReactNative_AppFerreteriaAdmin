@@ -11,10 +11,11 @@ export default function Menu() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Inicio" component={Inicio} />
+      <Stack.Screen name="actualizarEmpleado" component={PantallaProd}/>
+      <Stack.Screen name="agregarEmpleado" component={crearempleado}/>
         <Stack.Screen name='PantallaProd' component={PantallaProd}/>
         <Stack.Screen name='AgregarProd' component={PantallaAgregarP}/>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="CrearEmp" component={crearempleado}/>
         <Stack.Screen name="Busqueda" component={PaginaBusqueda} />
         <Stack.Screen name="Productos" component={PaginaProductos} />
         <Stack.Screen name="Producto" component={Producto} />

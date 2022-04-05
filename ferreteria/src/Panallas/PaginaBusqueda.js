@@ -3,9 +3,10 @@ import { StatusBar,TouchableOpacity,TextInput, StyleSheet, Text, View,Image,Safe
 
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { Boton, HiperVinculo, TextBox, PasswordBox, Footer, Header, ListaProducto, TarjetaProducto,TarjetaBusqueda } from '../componentes'
-
+import { useNavigation } from '@react-navigation/native';
 const PaginaBusqueda = ({route,navigation})=> {
     //Use state
+    const nav=useNavigation();
     const[busqueda,setBusqueda]=useState('');
     const[listas,setListas] = useState('');
     const[listaMaestra,setListaMaestra]=useState('');
@@ -67,9 +68,6 @@ const PaginaBusqueda = ({route,navigation})=> {
             
         }
        
-     
-
-
      const handleBusqueda=()=>{
         if(busqueda){
 
@@ -107,8 +105,26 @@ const PaginaBusqueda = ({route,navigation})=> {
         }
         else
         setListas(listaMaestra);
-        
      }
+
+     const handleAdd = ()=>{
+        console.log(route);
+        switch(route.params.toLowerCase())
+        {
+            case 'productos':{
+                console.log(route);
+                nav.push('AgregarProd');
+            }
+            break;
+            case 'empleados':{
+                nav.push('agregarEmpleado');
+
+            }
+            break
+        }
+
+
+     } 
     //Renders
      const renderLista=(item)=>{
         return( 
@@ -137,9 +153,13 @@ const PaginaBusqueda = ({route,navigation})=> {
                     <TextInput onFocus={()=>{setBuscando(true)}} onBlur={()=>{setBuscando(false)}}  returnKeyType='search'  defaultValue={busqueda} onChangeText={setBusqueda}  placeholder='Buscar producto' style={{flex:1}}/>
                     
             </View>
-           { buscando &&  <View style={{flex:5}}>
-            <Boton padding={0} text={'Cancelar'} onPress={()=>{setBusqueda('');Keyboard.dismiss() }}/>
+           { buscando &&  
+            <View style={{flex:5}}>
+                <Boton padding={0} text={'Cancelar'} onPress={()=>{setBusqueda('');Keyboard.dismiss() }}/>
             </View> }
+            <TouchableOpacity onPress={()=>{handleAdd()}}>
+                <Icon name="add-box"  color={'white'} size={50}/>
+            </TouchableOpacity>
         </View>
             
             <FlatList style={{width:'100%'}} ListEmptyComponent={renderVacio} data={listas} keyExtractor={item=>item.id_producto} ListFooterComponent={()=>{return( <Footer/>   )}} renderItem={renderLista}/>
