@@ -5,27 +5,31 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import {Boton,HiperVinculo,TextBox,PasswordBox,Footer, Texts, Header} from '../componentes/'
 const idcliente=7
 let primera=true;
-const clienteURL="http://localhost:6001/api/empleados/buscarEmpleado?id_empleado=";
-const clienteActu="http://localhost:6001/api/empelados/actualizarEmpleados?id_empleado=";
+const clienteURL="http://192.168.0.9:6001/api/empleados/buscarEmpleado?id_empleado=";
+const clienteActu="http://192.168.0.9:6001/api/empleados/actualizarEmpleados?id_empleado=";
 
-const Configuraciones=() => {
+const Empleado=({route}) => {
 
     const [nombre,setNombre]=useState(null);
     const [apellido,setApellido]=useState(null);
     const [telefono,setTelefono]=useState(null);
+    const[direccion,setDireccion]=useState(null);
 
     
-   /* useEffect(()=>{
+    useEffect(()=>{
+        if(primera==true){
         cargar();
-    },[Configuraciones])*/
-
+        }
+    },[]
+    )
     const cargar= async() => {
        
-            fetch(clienteURL+idcliente).then((response)=> response.json())
+            fetch(clienteURL+route.params.idCli).then((response)=> response.json())
             .then((json)=>{
                 setNombre(json.nom_empleado);
                 setApellido(json.apellido_empleado);
                 setTelefono(json.telefono_empleado);
+                setDireccion(json.direccion_empleado);
                 primera=false;
             })
             .catch((error)=>console.log(error))
@@ -34,17 +38,16 @@ const Configuraciones=() => {
     const presGuardarCambio= async() => {
       try {
           const respuesta = await fetch(
-           clienteActu,{
+           clienteActu+route.params.idCli,{
                method: 'PUT',
                headers:{
                    Accept: 'application/json',
                    'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                    nom_cliente: nombre,
-                    apellido_cliente: apellido,
-                    RTN: rtn,
-                    DNI_Cliente: dni,
-                    tel_cliente: telefono,
+                    nom_empleado: nombre,
+                    apellido_empleado: apellido,
+                    telefono_empleado: telefono,
+                    direccion_empleado: direccion,
                 })
             
                } );
@@ -70,8 +73,8 @@ const Configuraciones=() => {
         <Texts text={'Telefono'}/>
         <TextBox text={'95560237'} setValue={setTelefono} value={telefono} icon={'phone'} tipo={"number-pad"} max={12}/>
         <Texts text={'Dirección'}/>
-        <TextBox text={'Col. Felipe Zelaya'} setValue={setDni} value={dni} icon={'book'}/>
-            <Boton text={'Editar contraseña'} />
+        <TextBox text={'Col. Felipe Zelaya'} setValue={setDireccion} value={direccion} icon={'book'}/>
+            <Boton text={'Editar información'} onPress={cargar} />
             <Boton text={'Guardar Cambios'} onPress={presGuardarCambio}/>
     </View>
     <Footer/>
@@ -213,4 +216,4 @@ const styles = StyleSheet.create({
         }
 
 });
-export default Configuraciones;
+export default Empleado;

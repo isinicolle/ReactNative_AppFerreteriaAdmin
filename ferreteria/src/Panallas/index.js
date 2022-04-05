@@ -22,6 +22,26 @@ import PaginaBusqueda from './PaginaBusqueda';
 import PantallaProd from './editarEliminarProducto';
 import PantallaAgregarP from './agregarProducto';
 import crearempleado from './crearempleado';
+import Empleado from './infoEmpleado';
 export   {
-Login,PantallaAgregarP,crearempleado,PantallaProd,AgregarDireccion,PaginaBusqueda,PaginaProductos,CrearUsuario,Condiciones,HistorialCompra,HistorialDetalle,MisionVision,Privacidad,Inicio,Producto,Config,ConfirmarCorreo,Direcciones,Carrito,Pago,OlvidarContra,RegistroTerminado,Busqueda,InformacionUsuario
+Login,
+PantallaAgregarP,
+Empleado,
+crearempleado,
+PantallaProd,
+PaginaBusqueda,
+PaginaProductos,
+CrearUsuario,
+Condiciones,
+MisionVision,
+Privacidad
+,Inicio,
+Producto,
+Config,
+ConfirmarCorreo,
+
+OlvidarContra,
+RegistroTerminado,
+Busqueda,
+
 }
